@@ -29,8 +29,8 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(dk.mitfirma.regin.GenstandResource.class);
-        resources.add(dk.mitfirma.regin.GenstandsResource.class);
+        resources.add(dk.mitfirma.regin.DmdsObjectResource.class);
+        resources.add(dk.mitfirma.regin.DmdsObjectsResource.class);
     }
     
 }
