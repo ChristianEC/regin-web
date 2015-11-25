@@ -70,11 +70,10 @@ public class DmdsObjectsResource {
     @Produces("application/xml")
     public String getXml() {
         String context = uriInfo.getRequestUri().toString();
-        String prefix = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xhtml><head>\n<link href='" + context + "/";
-        String delimiter = "' />\n<link href='" + context + "/";
-        String suffix = "' />\n</head><body /></xhtml>";
+        String prefix = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xhtml><head>\n";
+        String suffix = "</head><body /></xhtml>";
         List<DmdsObject> L = dmdsService.findAll();
-        return L.stream().map(o -> o.getId().toString()).collect(joining(delimiter, prefix, suffix));
+        return L.stream().map(o -> "<link href=\"" + context + "/" + o.getId().toString() + "\" />\n").collect(joining("", prefix, suffix));
     }
 
     /**
@@ -97,7 +96,7 @@ public class DmdsObjectsResource {
      * @return 
      */
     @Path("{id}")
-    public DmdsObjectResource getGenstandResource(@PathParam("id") String id) {
+    public DmdsObjectResource getDmdsObjectResource(@PathParam("id") String id) {
         return DmdsObjectResource.getInstance(id, this);
     }
 }
