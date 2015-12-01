@@ -39,11 +39,11 @@ public class DmdsObjectsResource {
     UriInfo uriInfo;
     @PathParam("objType")
     private String objType;
-    @EJB(name = "SagEJB")
+    @EJB
     private SagEJB sagEJB;
-    @EJB(name = "GenstandEJB")
+    @EJB
     private GenstandEJB genstandEJB;
-    @EJB(name = "FilEJB")
+    @EJB
     private FilEJB filEJB;
     DmdsObjectEJB dmdsService;
 
@@ -70,8 +70,10 @@ public class DmdsObjectsResource {
     @Produces("application/xml")
     public String getXml() {
         String context = uriInfo.getRequestUri().toString();
-        String prefix = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xhtml><head>\n";
-        String suffix = "</head><body /></xhtml>";
+        String prefix = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n" +
+                "<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>DMDS resources</title>\n";
+        String suffix = "</head><body /></html>";
         List<DmdsObject> L = dmdsService.findAll();
         return L.stream().map(o -> "<link href=\"" + context + "/" + o.getId().toString() + "\" />\n").collect(joining("", prefix, suffix));
     }
