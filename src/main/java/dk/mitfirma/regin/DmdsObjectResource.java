@@ -26,9 +26,9 @@ import javax.ws.rs.core.UriInfo;
 public class DmdsObjectResource {
 
     private final String id;
-    private final DmdsObjectEJB dmdsService;
+    final DmdsObjectEJB dmdsService;
     private final UriInfo uriInfo;
-    private DmdsObject object;
+    DmdsObject object;
     
     /**
      * Creates a new instance of GenstandResource
